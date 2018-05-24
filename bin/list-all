@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+releases_path=https://api.github.com/repos/LogtalkDotOrg/logtalk3/tags
+cmd="curl -s"
+if [ -n "$OAUTH_TOKEN" ]; then
+  cmd="$cmd -H 'Authorization: token $OAUTH_TOKEN'"
+fi
+cmd="$cmd $releases_path"
+
+versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | sort )
+echo $versions
