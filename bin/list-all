@@ -10,7 +10,7 @@ sort_linux(){
 }
 
 sort_darwin(){
-  tail -r | tr '\r' ' '
+  tail -r | tr '\r' ' ' | tr '\n' ' '
 }
 
 versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | "${sort}")
