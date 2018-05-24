@@ -3,15 +3,5 @@
 releases_path=https://api.github.com/repos/LogtalkDotOrg/logtalk3/tags
 cmd="curl -s $releases_path"
 
-[ "Linux" = "$(uname)" ] && sort="sort_linux" || sort="sort_darwin"
-
-sort_linux(){
-  LC_ALL=C sort | xargs
-}
-
-sort_darwin(){
-  tail -r | tr '\r' ' ' | tr '\n' ' '
-}
-
-versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | "${sort}")
+versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | LC_ALL=C sort | awk '{print $1}' | tr '\n' ' ')
 echo $versions
