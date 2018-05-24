@@ -6,11 +6,11 @@ cmd="curl -s $releases_path"
 [ "Linux" = "$(uname)" ] && sort="sort_linux" || sort="sort_darwin"
 
 sort_linux(){
-  tac | paste -sd " "
+  LC_ALL=C sort | xargs
 }
 
 sort_darwin(){
-  tail -r | tr '\n' ' '
+  tail -r | tr '\r' ' '
 }
 
 versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | "${sort}")
