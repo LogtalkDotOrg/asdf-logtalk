@@ -3,5 +3,5 @@
 releases_path=https://api.github.com/repos/LogtalkDotOrg/logtalk3/tags
 cmd="curl -s $releases_path"
 
-versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed -n 's/.*lgt\(.*\)stable.*/\1/p' | sed -n 's/\(.\)\(..\)\(.\)/\1.\2.\3/p' | LC_ALL=C sort | awk '{print $1}')
-echo $versions
+versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed -n 's/.*lgt\(.*\)stable.*/\1/p' | sed -n 's/\(.\)\(..\)\(.\)/\1.\2.\3/p' | LC_ALL=C sort -t '.' | tr '\n' ' ')
+echo $versions | tr -s ' '
