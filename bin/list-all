@@ -13,5 +13,5 @@ sort_darwin(){
   tail -r | tr '\r' ' ' | tr '\n' ' ' | tr -s ' '
 }
 
-versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed 's/name\": \"lgt//;s/\",//' | sed 's/stable//;s/\",//' | "${sort}")
+versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed -n 's/.*lgt\(.*\)stable.*/\1/p' | sed -n 's/\(.\)\(..\)\(.\)/\1.\2.\3/p' | "${sort}")
 echo $versions

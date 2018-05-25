@@ -62,7 +62,7 @@ get_download_url() {
   local version=$2
 
   if [ "$install_type" = "version" ]; then
-    echo "https://github.com/LogtalkDotOrg/logtalk3/archive/lgt${version}stable.tar.gz"
+    echo "https://github.com/LogtalkDotOrg/logtalk3/archive/lgt"${version//.}"stable.tar.gz"
   else
     echo "https://github.com/logtalkdotorg/logtalk3/archive/${version}.tar.gz"
   fi
