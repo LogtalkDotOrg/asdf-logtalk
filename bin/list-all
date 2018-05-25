@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 
-releases_path=https://api.github.com/repos/LogtalkDotOrg/logtalk3/tags
-cmd="curl -s $releases_path"
+logtalk_versions=https://logtalk.org/files/versions.txt
+cmd="curl -s $logtalk_versions"
 
-logtalk_versions=$(eval $cmd | grep -oE "name\": \"lgt.{1,4}stable\"," | sed -n 's/.*lgt\(.*\)stable.*/\1/p' | sed -n 's/\(.\)\(..\)\(.\)/\1.\2.\3/p')
-
-for version in ${logtalk_versions[@]}
-do
-  versions="${version} ${versions}"
-done
+versions=$(eval $cmd | tr '\n' ' ')
 
 echo $versions

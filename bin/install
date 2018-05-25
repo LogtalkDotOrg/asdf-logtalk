@@ -20,7 +20,11 @@ install_logtalk() {
   # we don't want to disturb current working dir
   (
     mkdir -p $install_path
-    tar zxf $source_path -C $install_path --strip-components=1 || exit 1
+    if [[ $source_path =~ \.bz2$ ]] ; then
+      tar zxf $source_path -C $install_path --strip-components=1 || exit 1
+    else
+      tar jxf $source_path -C $install_path --strip-components=1 || exit 1
+    fi
     cd $install_path
     scripts/cleandist.sh
   
@@ -47,8 +51,8 @@ get_download_file_path() {
   local version=$2
   local tmp_download_dir=$3
 
-  if [ "$install_type" == version ]; then
-    local pkg_name="logtalk-${version}-stable.tar.gz"
+  if [ "$install_type" = "version" ]; then
+    local pkg_name="logtalk-${version}.tar.bz2"
   else
     local pkg_name="logtalk-${install_type}-${version}.tar.gz"
   fi
@@ -62,7 +66,7 @@ get_download_url() {
   local version=$2
 
   if [ "$install_type" = "version" ]; then
-    echo "https://github.com/LogtalkDotOrg/logtalk3/archive/lgt"${version//.}"stable.tar.gz"
+    echo "https://logtalk.org/files/logtalk-"${version//.}".tar.bz2"
   else
     echo "https://github.com/logtalkdotorg/logtalk3/archive/${version}.tar.gz"
   fi
