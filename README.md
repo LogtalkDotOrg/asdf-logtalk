@@ -13,4 +13,8 @@ Install
 Use
 ---
 
-Check the asdf documentation for instructions on how to install and manage Logtalk versions.
+Check the asdf documentation for instructions on how to install and manage
+Logtalk versions.
+
+Upon installing a Logtalk version using asdf commands, Logtalk can be
+executed by using the `*.lgt.sh` integration scripts.
