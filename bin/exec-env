@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-export LOGTALKHOME=$install_path
+export LOGTALKHOME=$ASDF_INSTALL_PATH
 export PATH=$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration:$PATH
 export 	MANPATH=$LOGTALKHOME/man:$MANPATH
