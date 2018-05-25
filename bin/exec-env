@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export LOGTALKHOME=$ASDF_INSTALL_PATH
+export LOGTALKHOME=$install_path
 export MANPATH=$LOGTALKHOME/man:$MANPATH
